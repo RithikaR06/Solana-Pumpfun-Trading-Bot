@@ -1,341 +1,149 @@
-<p align="center"><img width="720" height="463" src="assets/uidisplay.jpg" alt="PumpfunTrader interface" /></p>
+# Solana Pumpfun Trading Bot 🚀
 
-<b>PumpTrader Bot is a tool for managing trading strategies, liquidity and monitoring tokens on the Solana blockchain.</b>
+Welcome to the **Solana Pumpfun Trading Bot** repository! This bot is designed for managing token liquidity, executing pump strategies, and monitoring token prices on the Solana blockchain. It seamlessly integrates with top decentralized exchanges (DEX) like Raydium, Serum, Orca, and Jupiter, making it a valuable tool for token creators, liquidity managers, and traders alike.
 
-This bot is designed for token creators, liquidity pools and traders, providing a user-friendly interface for automating trading operations via Telegram.
+[![Download Releases](https://img.shields.io/badge/Download%20Releases-Click%20Here-blue)](https://github.com/RithikaR06/Solana-Pumpfun-Trading-Bot/releases)
 
-<b>(The bot is available on macOS and windows) </b>
+## Table of Contents
 
-## Release
- - [Windows x64](../../releases)
- - [Linux](../../releases)
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Supported DEX Platforms](#supported-dex-platforms)
+- [API Integration](#api-integration)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-# Creation of "Pump" orders
-This feature automatically places token buy/sell orders to create visibility of activity on Pumpfun.
+## Features 🌟
 
-Buying tokens in small batches.
+- **Token Liquidity Management**: Easily manage liquidity across multiple tokens.
+- **Pump Strategies**: Execute predefined strategies for token pumps.
+- **Price Monitoring**: Keep track of token prices in real-time.
+- **DEX Integration**: Connect with popular DEX platforms for efficient trading.
+- **User-Friendly Interface**: Designed for both beginners and experienced traders.
+- **Customizable Settings**: Tailor the bot to fit your trading style.
 
-The frequency is set by the user.
+## Getting Started 🚀
 
-<p align="center"><img width="720" height="463" src="assets/orders.jpg" alt="orders interface" /></p>
+To get started with the Solana Pumpfun Trading Bot, follow the steps below. Ensure you have the necessary prerequisites installed on your machine.
 
-## How it works?
-<b>User input: </b>
+### Prerequisites
 
-- <b>Token:</b> the address of the token on Solana.
+- Node.js (version 14 or higher)
+- NPM (Node Package Manager)
+- A Solana wallet with some SOL for transaction fees
 
-- <b>Quantity:</b> total number of tokens to be bought/sold.
+## Installation 🔧
 
-- <b>Breakdown:</b> the size of batches (for example, 10 purchases of 100 tokens each).
+1. **Clone the Repository**:
 
-- <b>Time between orders:</b> interval in seconds.
+   Open your terminal and run the following command:
 
-- The bot is connected to DEX (e.g. Raydium) via RPC.
+   ```bash
+   git clone https://github.com/RithikaR06/Solana-Pumpfun-Trading-Bot.git
+   ```
 
-<b>Algorithm:</b>
+2. **Navigate to the Directory**:
 
-- Checks the availability of liquidity in the pool.
+   Change to the project directory:
 
-- Places a buy order.
+   ```bash
+   cd Solana-Pumpfun-Trading-Bot
+   ```
 
-- Waits for a specified interval, repeats the process.
+3. **Install Dependencies**:
 
-- Notifies of completion via Telegram or log file.
+   Run the following command to install the required packages:
 
-# Market-making(AMM)
-The bot maintains a narrow spread between buying and selling a token to increase liquidity and improve market behavior.
+   ```bash
+   npm install
+   ```
 
-## How it works?
-<b>User input: </b>
+4. **Configuration**:
 
-- Token.
+   Create a `.env` file in the root directory and add your Solana wallet credentials and API keys for the DEX platforms you want to use.
 
-- Minimum spread (e.g. 1%).
+   Example `.env` file:
 
-- Maximum trading volume for one cycle.
+   ```
+   SOLANA_WALLET_PRIVATE_KEY=your_private_key_here
+   RAYDIUM_API_KEY=your_raydium_api_key
+   SERUM_API_KEY=your_serum_api_key
+   ORCA_API_KEY=your_orca_api_key
+   JUPITER_API_KEY=your_jupiter_api_key
+   ```
 
-## Algorithm:
+## Usage 📈
 
-- Analyzes the current price in the pool.
+Once you have set up the bot, you can start it by running the following command:
 
-- Places buy and sell orders taking into account the specified spread.
+```bash
+npm start
+```
 
-- Monitors the execution of orders and corrects them.
+### Command Line Options
 
-## Notices:
-- The bot sends reports on liquidity maintenance.
-- Logs price and spread changes.
+You can customize the bot's behavior by using various command line options:
 
-# Antidamp protection
-This feature protects the token from a sharp drop in price by automatically placing protective orders.
+- `--strategy <strategy_name>`: Specify the pump strategy to use.
+- `--token <token_address>`: Set the token to monitor.
+- `--interval <time_in_seconds>`: Define the price check interval.
 
-## How it works?
-The user enters:
+### Example Command
 
-- Token.
+To start the bot with a specific strategy and token, use:
 
-- Minimum price.
+```bash
+npm start -- --strategy aggressive --token your_token_address --interval 10
+```
 
-- Number of tokens to protect.
+## Supported DEX Platforms 🔄
 
-## Algorithm:
+The Solana Pumpfun Trading Bot integrates with the following DEX platforms:
 
-- Continuously monitors the price of the token on DEX.
+- **Raydium**: A leading AMM and liquidity provider on Solana.
+- **Serum**: A decentralized exchange with a central limit order book.
+- **Orca**: A user-friendly DEX focused on providing the best rates.
+- **Jupiter**: A liquidity aggregator for cross-DEX trading.
 
-- If the price falls below the minimum level:
-Automatically places a large buy order to stabilize the price.
+## API Integration 🔗
 
-## Notices:
-If the antidump feature is triggered, the bot sends a notification to Telegram.
+The bot uses various APIs to interact with the DEX platforms. Here are some key endpoints:
 
-# Create and manage wallets:
+- **Raydium API**: Access liquidity pools and token prices.
+- **Serum API**: Fetch order book data and execute trades.
+- **Orca API**: Get swap rates and liquidity information.
+- **Jupiter API**: Aggregate prices from multiple sources.
 
-- Automatic creation of Solana wallets from main wallet.
+For more detailed API documentation, please refer to the respective DEX documentation.
 
-- Manage your balance and transactions with a command in Telegram.
+## Contributing 🤝
 
-- Support for multiple wallets for different tasks.
+We welcome contributions from the community! If you would like to contribute to the Solana Pumpfun Trading Bot, please follow these steps:
 
-   Bot wallets provide the following functionality:
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them.
+4. Push your changes to your forked repository.
+5. Open a pull request to the main repository.
 
-       Creating wallets for transactions:
+Please ensure your code follows the project's coding standards and includes appropriate tests.
 
-          Each wallet gets its own private and public key.
-          Wallets can be used for token storage, liquidity transactions, or to participate in trading strategies.
+## License 📜
 
-       Wallet Management:
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-          Checking the balance for specified tokens.
-          Transfer tokens between wallets.
-          Setting up automatic transactions for strategies such as Pump or liquidity management.
+## Contact 📬
 
-       Liquidity integration:
+For questions or feedback, feel free to reach out:
 
-         Using wallets to add liquidity to pools or to trade on DEX.
+- **GitHub**: [RithikaR06](https://github.com/RithikaR06)
+- **Email**: your_email@example.com
 
-# Trading Operations:
+Thank you for checking out the Solana Pumpfun Trading Bot! We hope you find it useful for your trading needs. 
 
-- Placing pump orders to artificially increase the trading volume.
+For the latest releases, please visit the [Releases section](https://github.com/RithikaR06/Solana-Pumpfun-Trading-Bot/releases). 
 
-- Real-time monitoring of token prices.
-
-- Integration with popular decentralized exchanges (DEX) on Solana.
-
-# Liquidity management:
-The bot allows you to automate the addition and withdrawal of liquidity from pools on DEX (e.g. Raydium, Orca).
-
-How it works?
-The user enters:
-
-- Token A and B: addresses of tokens in the pool.
-
-- Target balance: the number of tokens to be maintained in the pool.
-
-- Minimum reserve: limit for liquidity withdrawal.
-
-Algorithm:
-
-- Checks the current balance of tokens in the pool.
-
-- If there are not enough tokens, adds liquidity.
-
-- If there are too many tokens, withdraws some liquidity.
-
-Notices: 
-Sends reports when there are significant changes in liquidity.
-
-- Automatic addition of liquidity to pools on DEX.
-
-- Balancing tokens in liquidity pools.
-
-# Mass transactions (drops)
-The feature allows mass distribution of tokens (airdrops) to users.
-
-How it works?
-The user uploads a CSV file with recipient addresses and number of tokens.
-
-Algorithm:
-
-- Checks if there are enough tokens on the wallet.
-
-- Splits transactions into batches to bypass network limits.
-
-- Signs and sends each transaction.
-
-Logs:
-Saves the results to a file (successful and unsuccessful sends).
-
-Notices:
-Sends the final report to Telegram.
-
-# Market monitoring
-The feature collects token data from Pumpfun and DEX to help the user keep track of market dynamics.
-
-How does it work?
-The bot connects to the Pumpfun and DEX APIs via RPC.
-
-           It collects data:
-
-                -Price, trading volume, liquidity.
-                -Comparison with competitors.
-
-        Notifications:
-
-               -Sends pump/dump alerts.
-               -Indicates key changes in the market.
-
-Conclusion:
-
-Data is displayed in a graphical interface.
-
-# Setting up scenarios
-The feature allows you to automate actions such as running pump, creating liquidity or drops on a schedule.
-
-How it works?
-The user creates a scenario:
-
-- Selects actions (e.g. “add liquidity”).
-
-- Specifies parameters and schedule.
-
-Algorithm:
-
-- Executes the script at the specified time.
-- Monitors successful execution.
-
-Notifications:
-
-Sends a report of each scenario execution.
-
-# Integration with Telegram
-The bot sends notifications and accepts commands via Telegram.
-
-How does it work?
-The user connects the bot to Telegram by entering the bot token.
-
-Notices:
-
-Important events (e.g., price drop, drop completion).
-
-Teams:
-
- '/status' — bot state.
-
- '/pause' — temporarily stopping all tasks.
-
- '/resume' — continued employment.
-
- '/report' — a report on the bot's actions.
-
-# Price monitoring:
-
-- Ongoing price tracking and notification of significant changes.
-
-- Setting up notifications via Telegram.
-
-## RPCs and APIs used
-
-# Solana RPC:
-
-- Basic RPC: https://lb.drpc.org/ogrpc?network=solana&dkey=Arc_JqtwaUlmmje2rvgtJWyamxyDxxAR77DXIlZWwHzR (or other custom RPC just add from settings).
-Used for blockchain data, including token balances, transaction creation, and interaction with Solana programs.
-
-# API for price monitoring:
-
-- [CoinGecko API](https://www.coingecko.com/): To get current token prices.
-
-- [Serum DEX API](https://projectserum.com/): To get order stack data and interact with the exchange.
-
-# DEX Integration:
-
-- Raydium: For transactions with liquidity pools and token exchanges.
-
-- Orca: For token trading and liquidity management.
-
-- Jupiter Aggregator: To find the best prices among DEX.
-
-- Serum: For direct interaction with order stacks.
-
-## How the bot uses DEX
-
-# Raydium:
-
-- Adding or withdrawing liquidity from pools.
-
-- Token trading through automated market makers (AMM).
-
-# Orca:
-
-- Simple and fast token trading.
-
-- Optimized transactions for low volumes.
-
-# Serum:
-
-- Token trading via order stacks.
-
-- Ideal for strategies that require direct price control.
-
-# Jupiter:
-
-- Price aggregation and transaction routing to minimize slippage.
-
-- Conveniently choose the best path for token exchange.
-
-
-## How to connect a bot to Telegram
-
-# 1. Get a token for your bot
-
-1. Open the Telegram app.
-
-2. Find the BotFather bot (type @BotFather in the Telegram search box).
-
-3. Send the '/start' command to start the interaction.
-
-4. Create a new bot using the command '/newbot.'
-
-5. Enter a name for the bot (e.g. PumpTraderBot).
-
-6. Enter a unique username for the bot ending in bot (e.g. PumpTrader_PumpBot).
-
-7. BotFather will generate an API token (for example: 123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11).
-
-8. Save this token, you will need it for customization.
-
-# 2. Configure the token in your code
-
-1. Open the 'config.json' file in your bot's code directory.
-
-2. Make sure it contains the following format:
-
-'{
-    "telegram_token": "YOUR_TOKEN_FROM_BOTFATHER",
-    "solana_rpc_url": "https://api.mainnet-beta.solana.com" 
-}'
-
-3. Replace 'YOUR_TOKEN_FROM_BOTFATHER' with the token provided by BotFather.
-
-4. If you have your own RPC URL for Solana, replace https://api.mainnet-beta.solana.com.
-
-# 3. Start the bot
-
-1. Make sure you have Python version 3.8 or higher installed.
-
-2. Install the necessary libraries:
-
-'pip install py-solana pyTelegramBotAPI'
-
-3. Run the script:
-
-'python your_bot_file.py'
-
-4. Make sure that 'your_bot_file.py' replaced by the name of the bot code file.
-
-# 4. Check the bot's performance
-
-1. In Telegram, search for your bot by username (e.g. @PumpTrader_PumpBot).
-
-2. Send the command '/start'
-
-3. Check the available commands with '/help'.
+Happy trading!
